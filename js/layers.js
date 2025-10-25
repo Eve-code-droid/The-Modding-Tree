@@ -15,114 +15,130 @@ addLayer("p", {
     baseAmount() { return player.points },
     type: "normal",
     exponent: 0.5,
-    
-    // === Upgrades (5x2 alternating) ===
+
+    // === Upgrades ===
     upgrades: {
-        // Row 1
-        11: { // Multiplier
+        // Existing upgrades
+        11: {
             title: "Double Points",
             description: "Achievement Point gain is doubled.",
             cost: new Decimal(5),
             effect() { return new Decimal(2) },
             effectDisplay() { return "x" + format(this.effect()) }
         },
-        12: { // Passive
-            title: "Extra Effort",
-            description: "Gain +1 Achievement Point per second.",
+        12: {
+            title: "Prestige Boost",
+            description: "Boost scales with your Prestige Points.",
             cost: new Decimal(10),
-            effect() { return new Decimal(1) },
-            effectDisplay() { return "+" + format(this.effect()) + " pts/sec" }
+            effect() { return player[this.layer].points.add(1).pow(0.5) },
+            effectDisplay() { return "x" + format(upgradeEffect(this.layer, this.id)) }
         },
-
-        13: { // Multiplier
+        13: {
+            title: "Point Influence",
+            description: "Your Points boost Prestige gain.",
+            cost: new Decimal(20),
+            effect() { return player.points.add(1).pow(0.15) },
+            effectDisplay() { return "x" + format(upgradeEffect(this.layer, this.id)) }
+        },
+        14: {
             title: "Triple Points",
             description: "Achievement Point gain is tripled.",
-            cost: new Decimal(15),
+            cost: new Decimal(25),
             effect() { return new Decimal(3) },
             effectDisplay() { return "x" + format(this.effect()) }
         },
-        14: { // Passive
-            title: "Study Time",
-            description: "Gain +5 Achievement Points per second.",
-            cost: new Decimal(25),
-            effect() { return new Decimal(5) },
-            effectDisplay() { return "+" + format(this.effect()) + " pts/sec" }
-        },
 
-        15: { // Multiplier
+        // --- 10 new upgrades ---
+        15: {
             title: "Quadruple Points",
-            description: "Achievement Point gain is quadrupled.",
-            cost: new Decimal(50),
+            description: "Gain 4x more Achievement Points.",
+            cost: new Decimal(40),
             effect() { return new Decimal(4) },
             effectDisplay() { return "x" + format(this.effect()) }
         },
-        16: { // Passive
-            title: "Overachiever",
-            description: "Gain +10 Achievement Points per second.",
-            cost: new Decimal(75),
-            effect() { return new Decimal(10) },
-            effectDisplay() { return "+" + format(this.effect()) + " pts/sec" }
+        16: {
+            title: "Prestige Surge",
+            description: "Prestige points boost gain further.",
+            cost: new Decimal(50),
+            effect() { return player.p.points.add(1).pow(0.75) },
+            effectDisplay() { return "x" + format(upgradeEffect(this.layer, this.id)) }
         },
-
-        // Row 2
-        17: { // Multiplier
+        17: {
+            title: "Point Frenzy",
+            description: "Total points increase gain.",
+            cost: new Decimal(60),
+            effect() { return player.points.add(1).pow(0.25) },
+            effectDisplay() { return "x" + format(upgradeEffect(this.layer, this.id)) }
+        },
+        18: {
             title: "Quintuple Points",
-            description: "Achievement Point gain is increased 5x.",
-            cost: new Decimal(100),
+            description: "Gain 5x more Achievement Points.",
+            cost: new Decimal(75),
             effect() { return new Decimal(5) },
             effectDisplay() { return "x" + format(this.effect()) }
         },
-        18: { // Passive
-            title: "Hard Worker",
-            description: "Gain +20 Achievement Points per second.",
-            cost: new Decimal(150),
-            effect() { return new Decimal(20) },
-            effectDisplay() { return "+" + format(this.effect()) + " pts/sec" }
+        19: {
+            title: "Prestige Overload",
+            description: "Prestige points massively boost gain.",
+            cost: new Decimal(100),
+            effect() { return player.p.points.add(1).pow(1) },
+            effectDisplay() { return "x" + format(upgradeEffect(this.layer, this.id)) }
         },
-
-        19: { // Multiplier
+        20: {
+            title: "Point Explosion",
+            description: "Total points significantly increase gain.",
+            cost: new Decimal(120),
+            effect() { return player.points.add(1).pow(0.35) },
+            effectDisplay() { return "x" + format(upgradeEffect(this.layer, this.id)) }
+        },
+        21: {
             title: "Sextuple Points",
-            description: "Achievement Point gain is increased 6x.",
-            cost: new Decimal(200),
+            description: "Gain 6x more Achievement Points.",
+            cost: new Decimal(150),
             effect() { return new Decimal(6) },
             effectDisplay() { return "x" + format(this.effect()) }
         },
-        20: { // Passive
-            title: "Night Owl",
-            description: "Gain +50 Achievement Points per second.",
+        22: {
+            title: "Prestige Mastery",
+            description: "Prestige points super boost gain.",
+            cost: new Decimal(200),
+            effect() { return player.p.points.add(1).pow(1.25) },
+            effectDisplay() { return "x" + format(upgradeEffect(this.layer, this.id)) }
+        },
+        23: {
+            title: "Point Overdrive",
+            description: "Total points super boost gain.",
+            cost: new Decimal(250),
+            effect() { return player.points.add(1).pow(0.5) },
+            effectDisplay() { return "x" + format(upgradeEffect(this.layer, this.id)) }
+        },
+        24: {
+            title: "Septuple Points",
+            description: "Gain 7x more Achievement Points.",
             cost: new Decimal(300),
-            effect() { return new Decimal(50) },
-            effectDisplay() { return "+" + format(this.effect()) + " pts/sec" }
+            effect() { return new Decimal(7) },
+            effectDisplay() { return "x" + format(this.effect()) }
         }
     },
 
-    // === Calculate multiplicative upgrades ===
+    // === Gain multiplier for points/sec and prestige gain ===
     gainMult() {
         let mult = new Decimal(1)
-        let multIds = [11, 13, 15, 17, 19] // Only multiplier upgrades
-        for (let id of multIds) {
-            if (hasUpgrade("p", id)) mult = mult.times(upgradeEffect("p", id))
+        for (let id = 11; id <= 24; id++) {
+            if (hasUpgrade('p', id)) mult = mult.times(upgradeEffect('p', id))
         }
         return mult
     },
 
     gainExp() { return new Decimal(1) },
 
-    // === Calculate points per second for UI ===
     layerPointGen() {
-        let gain = new Decimal(0)
-        let passiveIds = [12, 14, 16, 18, 20] // Passive upgrades
-        for (let id of passiveIds) {
-            if (hasUpgrade("p", id)) gain = gain.plus(upgradeEffect("p", id))
-        }
-        gain = gain.times(this.gainMult()) // Scale by multipliers
-        return gain
+        // Base gain = 1, multiplied by all upgrades
+        return new Decimal(1).times(this.gainMult())
     },
 
-    // === Update each tick ===
     update(diff) {
-        let gain = this.layerPointGen()
-        player.points = player.points.plus(gain.times(diff))
+        player.points = player.points.plus(this.layerPointGen().times(diff))
     },
 
     row: 0,
