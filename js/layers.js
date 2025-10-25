@@ -21,13 +21,13 @@ addLayer("p", {
         11: { title: "Double Points", description: "Gain 2x more points.", cost: new Decimal(5), effect() { return new Decimal(2) }, effectDisplay() { return "x" + format(this.effect()) } },
         12: { title: "Triple Points", description: "Gain 3x more points.", cost: new Decimal(15), effect() { return new Decimal(3) }, effectDisplay() { return "x" + format(this.effect()) } },
         13: { title: "Quadruple Points", description: "Gain 4x more points.", cost: new Decimal(50), effect() { return new Decimal(4) }, effectDisplay() { return "x" + format(this.effect()) } },
-        14: { title: "Quintuple Points", description: "Gain 5x more points.", cost: new Decimal(2500), effect() { return new Decimal(5) }, effectDisplay() { return "x" + format(this.effect()) } },
+        14: { title: "Quintuple Points", description: "Gain 5x more points.", cost: new Decimal(1000), effect() { return new Decimal(5) }, effectDisplay() { return "x" + format(this.effect()) } },
 
         // Only dynamic upgrade left: scales with prestige points
         15: {
             title: "Prestige Boost",
             description: "Gain scales with your Prestige Points.",
-            cost: new Decimal(50000),
+            cost: new Decimal(5000),
             effect() { return player.p.points.add(1).pow(0.5) },
             effectDisplay() { return "x" + format(upgradeEffect(this.layer, this.id)) }
         },
