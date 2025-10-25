@@ -20,24 +20,24 @@ addLayer("p", {
         // Static multiplicative upgrades
         11: { title: "Double Points", description: "Gain 2x more points.", cost: new Decimal(5), effect() { return new Decimal(2) }, effectDisplay() { return "x" + format(this.effect()) } },
         12: { title: "Triple Points", description: "Gain 3x more points.", cost: new Decimal(15), effect() { return new Decimal(3) }, effectDisplay() { return "x" + format(this.effect()) } },
-        13: { title: "Quadruple Points", description: "Gain 4x more points.", cost: new Decimal(25), effect() { return new Decimal(4) }, effectDisplay() { return "x" + format(this.effect()) } },
-        14: { title: "Quintuple Points", description: "Gain 5x more points.", cost: new Decimal(40), effect() { return new Decimal(5) }, effectDisplay() { return "x" + format(this.effect()) } },
+        13: { title: "Quadruple Points", description: "Gain 4x more points.", cost: new Decimal(50), effect() { return new Decimal(4) }, effectDisplay() { return "x" + format(this.effect()) } },
+        14: { title: "Quintuple Points", description: "Gain 5x more points.", cost: new Decimal(10000), effect() { return new Decimal(5) }, effectDisplay() { return "x" + format(this.effect()) } },
 
         // Only dynamic upgrade left: scales with prestige points
         15: {
             title: "Prestige Boost",
             description: "Gain scales with your Prestige Points.",
-            cost: new Decimal(50),
+            cost: new Decimal(500000),
             effect() { return player.p.points.add(1).pow(0.5) },
             effectDisplay() { return "x" + format(upgradeEffect(this.layer, this.id)) }
         },
 
         // More static upgrades
-        16: { title: "Sextuple Points", description: "Gain 6x more points.", cost: new Decimal(60), effect() { return new Decimal(6) }, effectDisplay() { return "x" + format(this.effect()) } },
-        17: { title: "Septuple Points", description: "Gain 7x more points.", cost: new Decimal(75), effect() { return new Decimal(7) }, effectDisplay() { return "x" + format(this.effect()) } },
-        18: { title: "Octuple Points", description: "Gain 8x more points.", cost: new Decimal(100), effect() { return new Decimal(8) }, effectDisplay() { return "x" + format(this.effect()) } },
-        19: { title: "Nonuple Points", description: "Gain 9x more points.", cost: new Decimal(125), effect() { return new Decimal(9) }, effectDisplay() { return "x" + format(this.effect()) } },
-        20: { title: "Decuple Points", description: "Gain 10x more points.", cost: new Decimal(150), effect() { return new Decimal(10) }, effectDisplay() { return "x" + format(this.effect()) } },
+        16: { title: "Sextuple Points", description: "Gain 6x more points.", cost: new Decimal(7500000000000), effect() { return new Decimal(6) }, effectDisplay() { return "x" + format(this.effect()) } },
+        17: { title: "Septuple Points", description: "Gain 7x more points.", cost: new Decimal(10000000000000000), effect() { return new Decimal(7) }, effectDisplay() { return "x" + format(this.effect()) } },
+        18: { title: "Octuple Points", description: "Gain 8x more points.", cost: new Decimal(100000000000000000000000), effect() { return new Decimal(8) }, effectDisplay() { return "x" + format(this.effect()) } },
+        19: { title: "Nonuple Points", description: "Gain 9x more points.", cost: new Decimal(120000000000000000000000000000), effect() { return new Decimal(9) }, effectDisplay() { return "x" + format(this.effect()) } },
+        20: { title: "Decuple Points", description: "Gain 10x more points.", cost: new Decimal(150000000000000000000000000000000000), effect() { return new Decimal(10) }, effectDisplay() { return "x" + format(this.effect()) } },
     },
 
     // Multiply all upgrades (including single prestige-scaling upgrade)
