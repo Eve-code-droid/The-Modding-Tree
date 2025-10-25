@@ -36,7 +36,7 @@ addLayer("p", {
         20: { title: "Decuple Points", description: "Gain 10x more points.", cost: new Decimal(150000000000000000000000000000000000), effect() { return new Decimal(10) }, effectDisplay() { return "x" + format(this.effect()) } },
     },
 
-    // Use getPointGen for TMT UI to correctly display points/sec
+    // TMT UI reads getPointGen for points/sec
     getPointGen() {
         let gain = new Decimal(1)
 
@@ -45,7 +45,7 @@ addLayer("p", {
             if (hasUpgrade('p', id)) gain = gain.times(upgradeEffect('p', id))
         }
 
-        // Science upgrades that affect Achievement Points
+        // Science upgrades that boost Achievement Points
         const scienceBoosts = [11,12,15,16,18,20]
         for (let id of scienceBoosts) {
             if (hasUpgrade('science', id)) gain = gain.times(upgradeEffect('science', id))
@@ -97,16 +97,11 @@ addLayer("science", {
         20: { title: "Artificial Intelligence", description: "Achievement Points gain scales with Science Points (0.5 exponent).", cost: new Decimal(500000), effect() { return player.science.points.add(1).pow(0.5) }, effectDisplay() { return "x" + format(upgradeEffect(this.layer, this.id)) } },
     },
 
-    getPointGen() {
-        let gain = new Decimal(1)
-        for (let id = 11; id <= 20; id++) {
-            if (hasUpgrade('science', id)) gain = gain.times(upgradeEffect('science', id))
-        }
-        return gain
-    },
+    // No passive Science gain
+    getPointGen() { return new Decimal(0) },
 
     update(diff) {
-        player.science.points = player.science.points.plus(this.getPointGen().times(diff))
+        // Do nothing; Science Points only change on reset
     },
 
     row: 1,
