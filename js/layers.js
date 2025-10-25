@@ -1,4 +1,4 @@
-addLayer("A", {
+addLayer("p", {
     name: "prestige",
     symbol: "A",
     position: 0,
@@ -11,7 +11,7 @@ addLayer("A", {
     color: "#4BDC13",
     requires: new Decimal(10),
     resource: "Achievement Points",
-    baseResource: "Points",
+    baseResource: "Awards",
     baseAmount() { return player.points },
     type: "normal",
     exponent: 0.5,
@@ -51,6 +51,7 @@ addLayer("A", {
 
     gainExp() { return new Decimal(1) },
 
+    // Points per second calculation for UI
     layerPointGen() {
         return new Decimal(1).times(this.gainMult())
     },
