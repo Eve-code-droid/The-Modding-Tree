@@ -3,14 +3,13 @@ let modInfo = {
 	author: "Aswormsh",
 	pointsName: "points",
 	modFiles: ["layers.js"],
-
-	initialStartPoints: new Decimal(10), // starting points
-	offlineLimit: 1,  // hours
+	initialStartPoints: new Decimal(10),
+	offlineLimit: 1,
 }
 
 let VERSION = {
 	num: "0.0",
-	name: "First Update",
+	name: "The first update",
 }
 
 let winText = `Congratulations! You have reached the end!`
@@ -31,17 +30,16 @@ function getPointGen() {
 
 	let gain = new Decimal(1)
 
-	// Prestige upgrades boost
-	if (hasUpgrade('p', 11)) gain = gain.times(upgradeEffect('p', 11))
-	if (hasUpgrade('p', 12)) gain = gain.times(upgradeEffect('p', 12))
-	if (hasUpgrade('p', 13)) gain = gain.times(upgradeEffect('p', 13))
-	if (hasUpgrade('p', 14)) gain = gain.times(upgradeEffect('p', 14))
-	if (hasUpgrade('p', 15)) gain = gain.times(upgradeEffect('p', 15))
-	if (hasUpgrade('p', 16)) gain = gain.times(upgradeEffect('p', 16))
-	if (hasUpgrade('p', 17)) gain = gain.times(upgradeEffect('p', 17))
-	if (hasUpgrade('p', 18)) gain = gain.times(upgradeEffect('p', 18))
-	if (hasUpgrade('p', 19)) gain = gain.times(upgradeEffect('p', 19))
-	if (hasUpgrade('p', 20)) gain = gain.times(upgradeEffect('p', 20))
+	// === Prestige upgrades ===
+	for (let id = 11; id <= 20; id++) {
+		if (hasUpgrade('p', id)) gain = gain.times(upgradeEffect('p', id))
+	}
+
+	// === Science upgrades that boost Achievement Points ===
+	const scienceBoosts = [11,12,15,16,18,20] // upgrade IDs that boost points
+	for (let id of scienceBoosts) {
+		if (hasUpgrade('s', id)) gain = gain.times(upgradeEffect('s', id))
+	}
 
 	return gain
 }
