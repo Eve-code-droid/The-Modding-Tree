@@ -43,7 +43,10 @@ addLayer("s", {
 	type: "normal",
 	exponent: 0.5,
 
-	upgrades: {},
+	upgrades: {
+		11: { title: "Microscope", description: "Double Achievement Points gain.", cost: new Decimal(1), effect() { return new Decimal(2) }, effectDisplay() { return "x" + format(this.effect()) } },
+		12: { title: "Laboratory", description: "Triple Achievement Points gain.", cost: new Decimal(5), effect() { return new Decimal(3) }, effectDisplay() { return "x" + format(this.effect()) } },
+	},
 
 	getPointGen() { return new Decimal(0) }, // no auto-gain
 	row: 1,
