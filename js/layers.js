@@ -1,4 +1,4 @@
-addLayer("p", {
+addLayer("A", {
     name: "prestige",
     symbol: "A",
     position: 0,
@@ -11,7 +11,7 @@ addLayer("p", {
     color: "#4BDC13",
     requires: new Decimal(10),
     resource: "Achievement Points",
-    baseResource: "Awards",
+    baseResource: "Points",
     baseAmount() { return player.points },
     type: "normal",
     exponent: 0.5,
