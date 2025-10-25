@@ -29,11 +29,11 @@ addLayer("p", {
             effect() { return player.p.points.add(1).pow(0.5) },
             effectDisplay() { return "x" + format(upgradeEffect(this.layer, this.id)) }
         },
-        16: { title: "Sextuple Points", description: "Gain 6x more points.", cost: new Decimal(750000000), effect() { return new Decimal(6) }, effectDisplay() { return "x" + format(this.effect()) } },
-        17: { title: "Septuple Points", description: "Gain 7x more points.", cost: new Decimal(10000000000), effect() { return new Decimal(7) }, effectDisplay() { return "x" + format(this.effect()) } },
-        18: { title: "Octuple Points", description: "Gain 8x more points.", cost: new Decimal(10000000000000), effect() { return new Decimal(8) }, effectDisplay() { return "x" + format(this.effect()) } },
-        19: { title: "Nonuple Points", description: "Gain 9x more points.", cost: new Decimal(1200000000000000), effect() { return new Decimal(9) }, effectDisplay() { return "x" + format(this.effect()) } },
-        20: { title: "Decuple Points", description: "Gain 10x more points.", cost: new Decimal(15000000000000000), effect() { return new Decimal(10) }, effectDisplay() { return "x" + format(this.effect()) } },
+        16: { title: "Sextuple Points", description: "Gain 6x more points.", cost: new Decimal(750), effect() { return new Decimal(6) }, effectDisplay() { return "x" + format(this.effect()) } },
+        17: { title: "Septuple Points", description: "Gain 7x more points.", cost: new Decimal(1000), effect() { return new Decimal(7) }, effectDisplay() { return "x" + format(this.effect()) } },
+        18: { title: "Octuple Points", description: "Gain 8x more points.", cost: new Decimal(5000), effect() { return new Decimal(8) }, effectDisplay() { return "x" + format(this.effect()) } },
+        19: { title: "Nonuple Points", description: "Gain 9x more points.", cost: new Decimal(10000), effect() { return new Decimal(9) }, effectDisplay() { return "x" + format(this.effect()) } },
+        20: { title: "Decuple Points", description: "Gain 10x more points.", cost: new Decimal(25000), effect() { return new Decimal(10) }, effectDisplay() { return "x" + format(this.effect()) } },
     },
 
     // TMT UI reads getPointGen for points/sec
@@ -85,15 +85,15 @@ addLayer("science", {
     exponent: 0.5,
 
     upgrades: {
-        11: { title: "Microscope", description: "Double Achievement Points gain.", cost: new Decimal(5), effect() { return new Decimal(2) }, effectDisplay() { return "x" + format(this.effect()) } },
-        12: { title: "Laboratory", description: "Triple Achievement Points gain.", cost: new Decimal(20), effect() { return new Decimal(3) }, effectDisplay() { return "x" + format(this.effect()) } },
-        13: { title: "Physics Research", description: "Double Science Points gain.", cost: new Decimal(50), effect() { return new Decimal(2) }, effectDisplay() { return "x" + format(this.effect()) } },
-        14: { title: "Chemistry Lab", description: "Triple Science Points gain.", cost: new Decimal(200), effect() { return new Decimal(3) }, effectDisplay() { return "x" + format(this.effect()) } },
+        11: { title: "Microscope", description: "Double Achievement Points gain.", cost: new Decimal(1), effect() { return new Decimal(2) }, effectDisplay() { return "x" + format(this.effect()) } },
+        12: { title: "Laboratory", description: "Triple Achievement Points gain.", cost: new Decimal(5), effect() { return new Decimal(3) }, effectDisplay() { return "x" + format(this.effect()) } },
+        13: { title: "Physics Research", description: "Double Science Points gain.", cost: new Decimal(10), effect() { return new Decimal(2) }, effectDisplay() { return "x" + format(this.effect()) } },
+        14: { title: "Chemistry Lab", description: "Triple Science Points gain.", cost: new Decimal(25), effect() { return new Decimal(3) }, effectDisplay() { return "x" + format(this.effect()) } },
         15: { title: "Innovation", description: "Achievement Points gain scales with Science Points.", cost: new Decimal(500), effect() { return player.science.points.add(1).pow(0.25) }, effectDisplay() { return "x" + format(upgradeEffect(this.layer, this.id)) } },
-        16: { title: "Advanced Microscope", description: "2.5x Achievement Points gain.", cost: new Decimal(1500), effect() { return new Decimal(2.5) }, effectDisplay() { return "x" + format(this.effect()) } },
-        17: { title: "Robotics Lab", description: "4x Science Points gain.", cost: new Decimal(5000), effect() { return new Decimal(4) }, effectDisplay() { return "x" + format(this.effect()) } },
-        18: { title: "Quantum Physics", description: "3x Achievement Points gain.", cost: new Decimal(20000), effect() { return new Decimal(3) }, effectDisplay() { return "x" + format(this.effect()) } },
-        19: { title: "Space Program", description: "5x Science Points gain.", cost: new Decimal(100000), effect() { return new Decimal(5) }, effectDisplay() { return "x" + format(this.effect()) } },
+        16: { title: "Advanced Microscope", description: "2.5x Achievement Points gain.", cost: new Decimal(75), effect() { return new Decimal(2.5) }, effectDisplay() { return "x" + format(this.effect()) } },
+        17: { title: "Robotics Lab", description: "4x Science Points gain.", cost: new Decimal(150), effect() { return new Decimal(4) }, effectDisplay() { return "x" + format(this.effect()) } },
+        18: { title: "Quantum Physics", description: "3x Achievement Points gain.", cost: new Decimal(500), effect() { return new Decimal(3) }, effectDisplay() { return "x" + format(this.effect()) } },
+        19: { title: "Space Program", description: "5x Science Points gain.", cost: new Decimal(1000), effect() { return new Decimal(5) }, effectDisplay() { return "x" + format(this.effect()) } },
         20: { title: "Artificial Intelligence", description: "Achievement Points gain scales with Science Points (0.5 exponent).", cost: new Decimal(500000), effect() { return player.science.points.add(1).pow(0.5) }, effectDisplay() { return "x" + format(upgradeEffect(this.layer, this.id)) } },
     },
 
