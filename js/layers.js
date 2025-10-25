@@ -1,28 +1,54 @@
 addLayer("p", {
-    name: "prestige", // This is optional, only used in a few places, If absent it just uses the layer id.
-    symbol: "A", // This appears on the layer's node. Default is the id with the first letter capitalized
-    position: 0, // Horizontal position within a row. By default it uses the layer id and sorts in alphabetical order
-    startData() { return {
-        unlocked: true,
-		points: new Decimal(0),
-    }},
+    name: "prestige",
+    symbol: "A",
+    position: 0,
+    startData() { 
+        return {
+            unlocked: true,
+            points: new Decimal(0),
+        }
+    },
     color: "#4BDC13",
-    requires: new Decimal(10), // Can be a function that takes requirement increases into account
-    resource: "Achievement Points", // Name of prestige currency
-    baseResource: "Awards", // Name of resource prestige is based on
-    baseAmount() {return player.points}, // Get the current amount of baseResource
-    type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
-    exponent: 0.5, // Prestige currency exponent
-    gainMult() { // Calculate the multiplier for main currency from bonuses
-        mult = new Decimal(1)
+    requires: new Decimal(10),
+    resource: "Achievement Points",
+    baseResource: "Awards",
+    baseAmount() { return player.points },
+    type: "normal",
+    exponent: 0.5,
+    
+    // === Upgrades ===
+    upgrades: {
+        11: {
+            title: "Double Points",
+            description: "Achievement Point gain is doubled, good boy.",
+            cost: new Decimal(10),
+            effect() { return new Decimal(2) },
+            effectDisplay() { return "x" + format(this.effect()) }
+        },
+        12: {
+            title: "Triple Points",
+            description: "Achievement Point gain is tripled.",
+            cost: new Decimal(50),
+            effect() { return new Decimal(3) },
+            effectDisplay() { return "x" + format(this.effect()) }
+        }
+    },
+
+    // Apply upgrades to gain multiplier
+    gainMult() {
+        let mult = new Decimal(1)
+        if (hasUpgrade("p", 11)) mult = mult.times(upgradeEffect("p", 11))
+        if (hasUpgrade("p", 12)) mult = mult.times(upgradeEffect("p", 12))
         return mult
     },
-    gainExp() { // Calculate the exponent on main currency from bonuses
+
+    gainExp() {
         return new Decimal(1)
     },
-    row: 0, // Row the layer is in on the tree (0 is the first row)
+
+    row: 0,
     hotkeys: [
         {key: "p", description: "P: Reset for Achievement points", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){return true}
+    layerShown(){ return true }
 })
