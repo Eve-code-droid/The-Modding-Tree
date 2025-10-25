@@ -52,70 +52,70 @@ addLayer("p", {
         15: {
             title: "Quadruple Points",
             description: "Gain 4x more Achievement Points.",
-            cost: new Decimal(40),
+            cost: new Decimal(1000),
             effect() { return new Decimal(4) },
             effectDisplay() { return "x" + format(this.effect()) }
         },
         16: {
             title: "Prestige Surge",
             description: "Prestige points boost gain further.",
-            cost: new Decimal(50),
+            cost: new Decimal(10000000),
             effect() { return player.p.points.add(1).pow(0.75) },
             effectDisplay() { return "x" + format(upgradeEffect(this.layer, this.id)) }
         },
         17: {
             title: "Point Frenzy",
             description: "Total points increase gain.",
-            cost: new Decimal(60),
+            cost: new Decimal(100000000000),
             effect() { return player.points.add(1).pow(0.25) },
             effectDisplay() { return "x" + format(upgradeEffect(this.layer, this.id)) }
         },
         18: {
             title: "Quintuple Points",
             description: "Gain 5x more Achievement Points.",
-            cost: new Decimal(75),
+            cost: new Decimal(1000000000000000),
             effect() { return new Decimal(5) },
             effectDisplay() { return "x" + format(this.effect()) }
         },
         19: {
             title: "Prestige Overload",
             description: "Prestige points massively boost gain.",
-            cost: new Decimal(100),
+            cost: new Decimal(1000000000000000000000),
             effect() { return player.p.points.add(1).pow(1) },
             effectDisplay() { return "x" + format(upgradeEffect(this.layer, this.id)) }
         },
         20: {
             title: "Point Explosion",
             description: "Total points significantly increase gain.",
-            cost: new Decimal(120),
+            cost: new Decimal(1000000000000000000000000000000000000),
             effect() { return player.points.add(1).pow(0.35) },
             effectDisplay() { return "x" + format(upgradeEffect(this.layer, this.id)) }
         },
         21: {
             title: "Sextuple Points",
             description: "Gain 6x more Achievement Points.",
-            cost: new Decimal(150),
+            cost: new Decimal(1000000000000000000000000000000000000000000000000),
             effect() { return new Decimal(6) },
             effectDisplay() { return "x" + format(this.effect()) }
         },
         22: {
             title: "Prestige Mastery",
             description: "Prestige points super boost gain.",
-            cost: new Decimal(200),
+            cost: new Decimal(100000000000000000000000000000000000000000000000000000000000000),
             effect() { return player.p.points.add(1).pow(1.25) },
             effectDisplay() { return "x" + format(upgradeEffect(this.layer, this.id)) }
         },
         23: {
             title: "Point Overdrive",
             description: "Total points super boost gain.",
-            cost: new Decimal(250),
+            cost: new Decimal(10000000000000000000000000000000000000000000000000000000000000000000000000000000000),
             effect() { return player.points.add(1).pow(0.5) },
             effectDisplay() { return "x" + format(upgradeEffect(this.layer, this.id)) }
         },
         24: {
             title: "Septuple Points",
             description: "Gain 7x more Achievement Points.",
-            cost: new Decimal(300),
+            cost: new Decimal(1000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000),
             effect() { return new Decimal(7) },
             effectDisplay() { return "x" + format(this.effect()) }
         }
