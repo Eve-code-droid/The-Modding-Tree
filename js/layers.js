@@ -36,29 +36,26 @@ addLayer("p", {
         20: { title: "Decuple Points", description: "Gain 10x more points.", cost: new Decimal(150000000000000000000000000000000000), effect() { return new Decimal(10) }, effectDisplay() { return "x" + format(this.effect()) } },
     },
 
-    // Multiply all upgrades (Prestige + Science boosts)
-    gainMult() {
-        let mult = new Decimal(1)
+    // Use getPointGen for TMT UI to correctly display points/sec
+    getPointGen() {
+        let gain = new Decimal(1)
+
         // Prestige upgrades
         for (let id = 11; id <= 20; id++) {
-            if (hasUpgrade('p', id)) mult = mult.times(upgradeEffect('p', id))
+            if (hasUpgrade('p', id)) gain = gain.times(upgradeEffect('p', id))
         }
-        // Science upgrades that boost Achievement Points
+
+        // Science upgrades that affect Achievement Points
         const scienceBoosts = [11,12,15,16,18,20]
         for (let id of scienceBoosts) {
-            if (hasUpgrade('science', id)) mult = mult.times(upgradeEffect('science', id))
+            if (hasUpgrade('science', id)) gain = gain.times(upgradeEffect('science', id))
         }
-        return mult
-    },
 
-    gainExp() { return new Decimal(1) },
-
-    layerPointGen() {
-        return new Decimal(1).times(this.gainMult())
+        return gain
     },
 
     update(diff) {
-        player.points = player.points.plus(this.layerPointGen().times(diff))
+        player.points = player.points.plus(this.getPointGen().times(diff))
     },
 
     row: 0,
@@ -100,22 +97,16 @@ addLayer("science", {
         20: { title: "Artificial Intelligence", description: "Achievement Points gain scales with Science Points (0.5 exponent).", cost: new Decimal(500000), effect() { return player.science.points.add(1).pow(0.5) }, effectDisplay() { return "x" + format(upgradeEffect(this.layer, this.id)) } },
     },
 
-    gainMult() {
-        let mult = new Decimal(1)
+    getPointGen() {
+        let gain = new Decimal(1)
         for (let id = 11; id <= 20; id++) {
-            if (hasUpgrade('science', id)) mult = mult.times(upgradeEffect('science', id))
+            if (hasUpgrade('science', id)) gain = gain.times(upgradeEffect('science', id))
         }
-        return mult
-    },
-
-    gainExp() { return new Decimal(1) },
-
-    layerPointGen() {
-        return new Decimal(1).times(this.gainMult())
+        return gain
     },
 
     update(diff) {
-        player.science.points = player.science.points.plus(this.layerPointGen().times(diff))
+        player.science.points = player.science.points.plus(this.getPointGen().times(diff))
     },
 
     row: 1,
@@ -124,7 +115,7 @@ addLayer("science", {
     ],
 
     layerShown() {
-        // Permanently show once unlocked, otherwise unlock at 100 Achievement Points
+        // Permanently visible once unlocked
         return player.p.points.gte(100) || player.science.unlocked
     }
 })
