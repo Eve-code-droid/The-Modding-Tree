@@ -130,5 +130,9 @@ addLayer("science", {
     hotkeys: [
         {key: "c", description: "C: Reset for Science Points", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
     ],
-    layerShown(){ return player.p.points.gte(100) }
+    layerShown() {
+    // Show if Achievement Points >= 100 OR if layer has been unlocked before
+    return player.p.points.gte(100) || player.science.unlocked
+    }
+
 })
