@@ -18,22 +18,22 @@ addLayer("p", {
     exponent: 0.5,
 
     upgrades: {
-        11: { title: "Double Points", description: "Gain 2x more points.", cost: new Decimal(5), effect() { return new Decimal(2) }, effectDisplay() { return "x" + format(this.effect()) } },
-        12: { title: "Triple Points", description: "Gain 3x more points.", cost: new Decimal(15), effect() { return new Decimal(3) }, effectDisplay() { return "x" + format(this.effect()) } },
-        13: { title: "Quadruple Points", description: "Gain 4x more points.", cost: new Decimal(50), effect() { return new Decimal(4) }, effectDisplay() { return "x" + format(this.effect()) } },
-        14: { title: "Quintuple Points", description: "Gain 5x more points.", cost: new Decimal(1000), effect() { return new Decimal(5) }, effectDisplay() { return "x" + format(this.effect()) } },
+        11: { title: "Double Points", description: "Gain 2x more points.", cost: new Decimal(1), effect() { return new Decimal(2) }, effectDisplay() { return "x" + format(this.effect()) } },
+        12: { title: "Triple Points", description: "Gain 3x more points.", cost: new Decimal(5), effect() { return new Decimal(3) }, effectDisplay() { return "x" + format(this.effect()) } },
+        13: { title: "Quadruple Points", description: "Gain 4x more points.", cost: new Decimal(15), effect() { return new Decimal(4) }, effectDisplay() { return "x" + format(this.effect()) } },
+        14: { title: "Quintuple Points", description: "Gain 5x more points.", cost: new Decimal(50), effect() { return new Decimal(5) }, effectDisplay() { return "x" + format(this.effect()) } },
         15: {
             title: "Prestige Boost",
             description: "Gain scales with your Prestige Points.",
-            cost: new Decimal(5000),
+            cost: new Decimal(150),
             effect() { return player.p.points.add(1).pow(0.5) },
             effectDisplay() { return "x" + format(upgradeEffect(this.layer, this.id)) }
         },
-        16: { title: "Sextuple Points", description: "Gain 6x more points.", cost: new Decimal(7500000000000), effect() { return new Decimal(6) }, effectDisplay() { return "x" + format(this.effect()) } },
-        17: { title: "Septuple Points", description: "Gain 7x more points.", cost: new Decimal(10000000000000000), effect() { return new Decimal(7) }, effectDisplay() { return "x" + format(this.effect()) } },
-        18: { title: "Octuple Points", description: "Gain 8x more points.", cost: new Decimal(100000000000000000000000), effect() { return new Decimal(8) }, effectDisplay() { return "x" + format(this.effect()) } },
-        19: { title: "Nonuple Points", description: "Gain 9x more points.", cost: new Decimal(120000000000000000000000000000), effect() { return new Decimal(9) }, effectDisplay() { return "x" + format(this.effect()) } },
-        20: { title: "Decuple Points", description: "Gain 10x more points.", cost: new Decimal(150000000000000000000000000000000000), effect() { return new Decimal(10) }, effectDisplay() { return "x" + format(this.effect()) } },
+        16: { title: "Sextuple Points", description: "Gain 6x more points.", cost: new Decimal(750000000), effect() { return new Decimal(6) }, effectDisplay() { return "x" + format(this.effect()) } },
+        17: { title: "Septuple Points", description: "Gain 7x more points.", cost: new Decimal(10000000000), effect() { return new Decimal(7) }, effectDisplay() { return "x" + format(this.effect()) } },
+        18: { title: "Octuple Points", description: "Gain 8x more points.", cost: new Decimal(10000000000000), effect() { return new Decimal(8) }, effectDisplay() { return "x" + format(this.effect()) } },
+        19: { title: "Nonuple Points", description: "Gain 9x more points.", cost: new Decimal(1200000000000000), effect() { return new Decimal(9) }, effectDisplay() { return "x" + format(this.effect()) } },
+        20: { title: "Decuple Points", description: "Gain 10x more points.", cost: new Decimal(15000000000000000), effect() { return new Decimal(10) }, effectDisplay() { return "x" + format(this.effect()) } },
     },
 
     // TMT UI reads getPointGen for points/sec
