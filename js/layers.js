@@ -22,13 +22,7 @@ addLayer("p", {
         12: { title: "Triple Points", description: "Gain 3x more points.", cost: new Decimal(5), effect() { return new Decimal(3) }, effectDisplay() { return "x" + format(this.effect()) } },
         13: { title: "Quadruple Points", description: "Gain 4x more points.", cost: new Decimal(15), effect() { return new Decimal(4) }, effectDisplay() { return "x" + format(this.effect()) } },
         14: { title: "Quintuple Points", description: "Gain 5x more points.", cost: new Decimal(50), effect() { return new Decimal(5) }, effectDisplay() { return "x" + format(this.effect()) } },
-        15: {
-            title: "Prestige Boost",
-            description: "Gain scales with your Prestige Points.",
-            cost: new Decimal(150),
-            effect() { return player.p.points.add(1).pow(0.5) },
-            effectDisplay() { return "x" + format(upgradeEffect(this.layer, this.id)) }
-        },
+        15: { title: "Prestige Boost", description: "Gain scales with your Prestige Points.", cost: new Decimal(150), effect() { return player.p.points.add(1).pow(0.5) }, effectDisplay() { return "x" + format(upgradeEffect(this.layer, this.id)) } },
         16: { title: "Sextuple Points", description: "Gain 6x more points.", cost: new Decimal(750), effect() { return new Decimal(6) }, effectDisplay() { return "x" + format(this.effect()) } },
         17: { title: "Septuple Points", description: "Gain 7x more points.", cost: new Decimal(1000), effect() { return new Decimal(7) }, effectDisplay() { return "x" + format(this.effect()) } },
         18: { title: "Octuple Points", description: "Gain 8x more points.", cost: new Decimal(5000), effect() { return new Decimal(8) }, effectDisplay() { return "x" + format(this.effect()) } },
@@ -36,20 +30,22 @@ addLayer("p", {
         20: { title: "Decuple Points", description: "Gain 10x more points.", cost: new Decimal(25000), effect() { return new Decimal(10) }, effectDisplay() { return "x" + format(this.effect()) } },
     },
 
-    // TMT UI reads getPointGen for points/sec
+    // TMT uses getPointGen to calculate points/sec and UI
     getPointGen() {
         let gain = new Decimal(1)
 
-        // Prestige upgrades
+        // Apply Prestige upgrades
         for (let id = 11; id <= 20; id++) {
             if (hasUpgrade('p', id)) gain = gain.times(upgradeEffect('p', id))
         }
 
-        // Science upgrades that boost Achievement Points
-        const scienceBoosts = [11,12,15,16,18,20]
-        for (let id of scienceBoosts) {
-            if (hasUpgrade('science', id)) gain = gain.times(upgradeEffect('science', id))
-        }
+        // Apply Science upgrades that boost Achievement Points
+        if (hasUpgrade('science', 11)) gain = gain.times(upgradeEffect('science',11)) // Microscope
+        if (hasUpgrade('science', 12)) gain = gain.times(upgradeEffect('science',12)) // Laboratory
+        if (hasUpgrade('science', 15)) gain = gain.times(upgradeEffect('science',15)) // Innovation
+        if (hasUpgrade('science', 16)) gain = gain.times(upgradeEffect('science',16)) // Advanced Microscope
+        if (hasUpgrade('science', 18)) gain = gain.times(upgradeEffect('science',18)) // Quantum Physics
+        if (hasUpgrade('science', 20)) gain = gain.times(upgradeEffect('science',20)) // Artificial Intelligence
 
         return gain
     },
@@ -64,6 +60,7 @@ addLayer("p", {
     ],
     layerShown(){ return true }
 })
+
 
 // === Science Layer ===
 addLayer("science", {
